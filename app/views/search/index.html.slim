@@ -1,0 +1,15 @@
+.search_results
+  - if @search_results.empty?
+    span.result No search results
+  - else
+    h1.result Found:
+    - @search_results.each do |result|
+      - if result.is_a?(Question)
+        h4= link_to(result.title, question_path(result))
+      - elsif result.is_a?(Answer)
+        h4= link_to(result.body, question_path(result.question))
+      - elsif result.is_a?(Comment)
+        h4= link_to(result.body, question_path(result.commentable))
+      - else
+        h4= result.email
+        
